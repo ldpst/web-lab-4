@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Jakarta EE API подключаем только для компиляции — сервер содержит реализацию
+    compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+
+    testImplementation libs.junit
+    implementation libs.guava
+}
+
+// Инструментальная Java (17)
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+war {
+    archiveFileName = 'ROOT.war'
+}
