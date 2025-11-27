@@ -10,6 +10,11 @@ repositories {
 dependencies {
     // Jakarta EE API подключаем только для компиляции — сервер содержит реализацию
     compileOnly 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
+    implementation("org.hibernate.orm:hibernate-core:6.4.4.Final")
+    implementation("org.postgresql:postgresql:42.7.3")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
 
     testImplementation libs.junit
     implementation libs.guava
