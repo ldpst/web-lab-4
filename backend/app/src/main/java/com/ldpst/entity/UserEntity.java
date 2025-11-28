@@ -12,6 +12,7 @@ public class UserEntity {
     private String email;
     @Column(nullable = false)
     private String passwordHash;
+    private String salt;
     private Boolean isConfirm;
 
     public long getId() {
@@ -24,6 +25,10 @@ public class UserEntity {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     public Boolean getIsConfirm() {
@@ -40,6 +45,10 @@ public class UserEntity {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public void setIsConfirm(Boolean isConfirm) {

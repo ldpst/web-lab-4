@@ -38,10 +38,11 @@ public class UserService {
     }
 
     @Transient
-    public UserEntity save(String email, String passwordHash) {
+    public UserEntity save(String email, String passwordHash, String salt) {
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(email);
         userEntity.setPasswordHash(passwordHash);
+        userEntity.setSalt(salt);
         em.persist(userEntity);
         return userEntity;
     }

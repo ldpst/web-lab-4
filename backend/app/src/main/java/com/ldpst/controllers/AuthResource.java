@@ -18,8 +18,9 @@ public class AuthResource {
     @EJB
     private UserService userService;
 
-    private final String invalidEmailMsg = "{\"isAuth\":\"false\",\"error\":\"invalid email\"}";
-    private final String invalidPasswordMsg = "{\"isAuth\":\"false\",\"error\":\"invalid password\"}";
+    private final String invalidEmailMsg = "{\"isAuth\":\"false\",\"error\":\"Invalid email\"}";
+    private final String invalidPasswordMsg = "{\"isAuth\":\"false\",\"error\":\"Invalid password\"}";
+    private final String invalidSaltMsg = "{\"isAuth\":\"false\",\"error\":\"Salt not found\"}";
 
     @POST
     @Path("/login")
@@ -35,7 +36,7 @@ public class AuthResource {
             String json = "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId()) + "\"}";
             return json;
         } else {
-            return "{\"isAuth\":\"false\",\"error\":\"wrong email or password\"}";
+            return "{\"isAuth\":\"false\",\"error\":\"Wrong email or password\"}";
         }
     }
 
@@ -48,17 +49,32 @@ public class AuthResource {
         if (!UserValidator.checkEmail(email)) return invalidEmailMsg;
         String passwordHash = dto.getPasswordHash();
         if (!UserValidator.checkPasswordHash(passwordHash)) return invalidPasswordMsg;
+        String salt = dto.getSalt();
+        if (!UserValidator.checkSalt(salt)) return invalidSaltMsg;
         UserEntity oUser = userService.findByEmail(email);
         if (oUser == null) {
-            UserEntity user = userService.save(email, passwordHash);
+            UserEntity user = userService.save(email, passwordHash, salt);
             if (user != null) {
                 return "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId()) + "\"}";
             } else {
-                return "{\"isAuth\":\"false\",\"error\":\"server error. code: 37933\"}";
+                return "{\"isAuth\":\"false\",\"error\":\"Server error. Code: 37933\"}";
             }
         } else {
-            return "{\"isAuth\":\"false\",\"error\":\"email already in use\"}";
+            return "{\"isAuth\":\"false\",\"error\":\"Email already in use\"}";
         }
+    }
+
+    @POST
+    @Path("/getsalt")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getSalt(AuthUserDTO dto) {
+        String email = dto.getEmail();
+        UserEntity user = userService.findByEmail(email);
+        if (user != null && user.getSalt() != null) {
+            return "{\"salt\":\"" + user.getSalt() + "\"}";
+        }
+        return null;
     }
 
     @POST

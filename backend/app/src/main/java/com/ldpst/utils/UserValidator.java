@@ -20,4 +20,11 @@ public class UserValidator {
         }
         return false;
     }
+
+    public static boolean checkSalt(String salt) {
+        if (salt != null && !salt.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }
