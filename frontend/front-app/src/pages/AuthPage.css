@@ -1,5 +1,5 @@
 :root {
-    --first-background-color: #e5383b;
+    --first-background-color: #40916c;
     --second-background-color: #f5f3f4;
     --third-background-color: #d3d3d3;
     --forth-background-color: #a4161a;
@@ -73,7 +73,7 @@ body {
     min-height: calc(100% - var(--top-panel-height));
     box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.5), 
         5px 0px 10px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(#e5383b 50%, #f5f3f4 50%);
+    background: linear-gradient(var(--first-background-color) 50%, var(--second-background-color) 50%);
 }
 
 .auth-input {
