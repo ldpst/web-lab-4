@@ -7,6 +7,7 @@ import com.ldpst.utils.JwtGenerator;
 import com.ldpst.utils.UserValidator;
 
 import jakarta.ejb.EJB;
+import jakarta.json.JsonObject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -78,8 +79,15 @@ public class AuthResource {
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    public String check() {
-        return "zxc";
+    @Path("/checktoken")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String checkToken(JsonObject jsonObj) {
+        String token = jsonObj.getString("token");
+        Long id = JwtGenerator.validateToken(token);
+        if (id != null) {
+            return "{\"isValid\":\"true\",\"id\":"+ id.toString() + "}";
+        }
+        return "{\"isValid\":\"false\"}";
     }
 }

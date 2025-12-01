@@ -12,7 +12,7 @@ public class JwtGenerator {
     private static final SecretKey key = (SecretKey) Jwts.SIG.HS256.key().build();
 
     public static String generateToken(Long id) { 
-        long expirationMs = 600000;
+        long expirationMs = 3600000;
         
         return Jwts.builder()
             .subject(id.toString())

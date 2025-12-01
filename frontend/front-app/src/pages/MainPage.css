@@ -1,0 +1,47 @@
+.main-div {
+    background-color: blue;
+    height: 100%;
+    width: calc(100% - 500px);
+}
+
+.fullsize {
+    width: 100%;
+    height: 100%;
+}
+
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-div {
+    margin: auto;
+    width: 440px;
+    height: 440px;
+    background-color: yellow;
+}
+
+#graph-container {
+    margin: auto;
+    width: 440px;
+    height: 440px;
+    background-color: yellow;
+}
+
+.top-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-div {
+    width: 100%;
+}
+
+#scroll-table {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    overflow-y: auto;
+}

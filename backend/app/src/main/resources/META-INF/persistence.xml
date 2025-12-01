@@ -3,6 +3,7 @@
         <jta-data-source>java:jboss/datasources/PostgreDS</jta-data-source>
 
         <class>com.ldpst.entity.UserEntity</class>
+        <class>com.ldpst.entity.Point</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
