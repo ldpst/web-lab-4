@@ -34,7 +34,7 @@ public class AuthResource {
         if (!UserValidator.checkPasswordHash(passwordHash)) return invalidPasswordMsg;
         UserEntity user = userService.findByEmailAndPasswordHash(email, passwordHash);
         if (user != null) {
-            String json = "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId()) + "\"}";
+            String json = "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId(), email) + "\"}";
             return json;
         } else {
             return "{\"isAuth\":\"false\",\"error\":\"Wrong email or password\"}";
@@ -56,7 +56,7 @@ public class AuthResource {
         if (oUser == null) {
             UserEntity user = userService.save(email, passwordHash, salt);
             if (user != null) {
-                return "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId()) + "\"}";
+                return "{\"isAuth\":\"true\",\"token\":\"" + JwtGenerator.generateToken(user.getId(), email) + "\"}";
             } else {
                 return "{\"isAuth\":\"false\",\"error\":\"Server error. Code: 37933\"}";
             }

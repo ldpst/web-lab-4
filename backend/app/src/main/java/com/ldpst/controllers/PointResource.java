@@ -4,15 +4,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.ldpst.DTO.PointDTO;
+import com.ldpst.DTO.TokenDTO;
 import com.ldpst.entity.Point;
 import com.ldpst.repository.PointService;
 import com.ldpst.utils.JwtGenerator;
 import com.ldpst.utils.PointValidator;
 
 import jakarta.ejb.EJB;
-import jakarta.json.JsonObject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -52,8 +51,8 @@ public class PointResource {
     @Path("/clear")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String clearPoints(JsonObject jsonObj) {
-        String token = jsonObj.getString("token");
+    public String clearPoints(TokenDTO dto) {
+        String token = dto.getToken();
         Long owner = JwtGenerator.validateToken(token);
         if (owner != null) {
             pointService.clearAllByOwnerId(owner);
@@ -62,15 +61,17 @@ public class PointResource {
         return "{\"isSuccess\":\"false\",\"error\":\"Token not found\"}";
     }
 
-    @GET
+    @POST
     @Path("/get")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON) 
-    public String getPoints(JsonObject jsonObj) {
-        String token = jsonObj.getString("token");
+    public String getPoints(TokenDTO dto) {
+        String token = dto.getToken();
         Long owner = JwtGenerator.validateToken(token);
         if (owner != null) {
+            System.out.println("Owner !null");
             List<Point> points = pointService.findAllByOwnerId(owner);
+            System.out.println(points);
             StringBuilder sb = new StringBuilder();
             sb.append("{\"isSuccess\":\"true\", \"points\":[");
             for (int i = 0; i < points.size(); i++) {
@@ -89,7 +90,11 @@ public class PointResource {
             }
 
             sb.append("]}");
+            return sb.toString();
         }
-        return "{\"isSuccess\":\"false\",\"error\":\"Token not found\"}";
+        else {
+            System.out.println("owner null");
+            return "{\"isSuccess\":\"false\",\"error\":\"Token not found\"}";
+        }
     }
 }

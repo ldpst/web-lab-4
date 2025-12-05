@@ -243,7 +243,7 @@ body {
 
 @media (max-width: 1050px) {
     .header-div {
-        display: none;
+        display: none !important;
     }
 
     #pic-div {

@@ -53,6 +53,7 @@ function AuthPage() {
                         ref={passwordRef}
                         className="auth-input"
                         id="password-input"
+                        type="password"
                     />
                     <button className="auth-input auth-btn" onClick={tryLogin}>Enter</button>
                     <div ref={authErrorRef} id="auth-error">Ошибка</div>
@@ -95,6 +96,7 @@ function AuthPage() {
                         ref={passwordRef}
                         className="auth-input"
                         id="password-input"
+                        type="password"
                     />
                     <div className="div-with-error">
                         <span className="auth-field">Repeat password:</span>
@@ -104,6 +106,7 @@ function AuthPage() {
                         ref={rePasswordRef}
                         className="auth-input"
                         id="re-password-input"
+                        type="password"
                     />
                     <button className="auth-input auth-btn" onClick={tryRegister}>Enter</button>
                     <div ref={authErrorRef} id="auth-error">Ошибка</div>

@@ -11,11 +11,12 @@ import io.jsonwebtoken.Jwts;
 public class JwtGenerator {
     private static final SecretKey key = (SecretKey) Jwts.SIG.HS256.key().build();
 
-    public static String generateToken(Long id) { 
+    public static String generateToken(Long id, String email) { 
         long expirationMs = 3600000;
         
         return Jwts.builder()
             .subject(id.toString())
+            .claim("email", email)
             .issuedAt(new Date())
             .expiration(new Date(System.currentTimeMillis() + expirationMs))
             .signWith(key)

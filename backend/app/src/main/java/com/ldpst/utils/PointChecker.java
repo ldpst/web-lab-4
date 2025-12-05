@@ -5,6 +5,11 @@ import java.math.RoundingMode;
 
 public class PointChecker {
     public static boolean check(BigDecimal x, BigDecimal y, BigDecimal r) {
+        if (r.compareTo(BigDecimal.ZERO) < 0) {
+                r = r.negate();
+                x = x.negate();
+                y = y.negate();
+        }
 
         BigDecimal halfR = r.divide(BigDecimal.valueOf(2), 10, RoundingMode.HALF_UP);
         // BigDecimal halfX = x.divide(BigDecimal.valueOf(2), 10, RoundingMode.HALF_UP);
@@ -13,20 +18,20 @@ public class PointChecker {
 
         boolean inTriangle =
                 (x.compareTo(BigDecimal.ZERO) >= 0) &&
-                        (x.compareTo(r) <= 0) &&
-                        (y.compareTo(BigDecimal.ZERO) <= 0) &&
-                        (y.compareTo(x.add(r.negate())) >= 0);
+                        (x.compareTo(halfR) <= 0) &&
+                        (y.compareTo(BigDecimal.ZERO) >= 0) &&
+                        (y.compareTo(x.negate().multiply(new BigDecimal(2)).add(r)) <= 0);
 
         boolean inRectangle =
                 (x.compareTo(BigDecimal.ZERO) <= 0) &&
-                        (x.compareTo(halfR.negate()) >= 0) &&
-                        (y.compareTo(BigDecimal.ZERO) <= 0) &&
-                        (y.compareTo(r.negate()) >= 0);
+                        (x.compareTo(r.negate()) >= 0) &&
+                        (y.compareTo(BigDecimal.ZERO) >= 0) &&
+                        (y.compareTo(r) <= 0);
 
         boolean inCircle =
                 (x.compareTo(BigDecimal.ZERO) <= 0) &&
-                        (y.compareTo(BigDecimal.ZERO) >= 0) &&
-                        (sumSquares.compareTo(halfR.multiply(halfR)) <= 0);
+                        (y.compareTo(BigDecimal.ZERO) <= 0) &&
+                        (sumSquares.compareTo(r.multiply(r)) <= 0);
 
         System.out.println("Checking: x=" + x + ", y=" + y + ", r=" + r);
 

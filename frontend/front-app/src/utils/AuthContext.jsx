@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect } from "react";
-// import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -9,7 +9,19 @@ export const AuthRouter = ({ children }) => {
 
     useEffect(() => {
         if (token) {
-            // setUser(jwt_decode(token).username);
+            try {
+                const decoded = jwtDecode(token);
+
+                setUser({
+                    id: decoded.sub,
+                    email: decoded.email
+                });
+            } catch (e) {
+                console.error("Invalid token:", e);
+                setUser(null);
+            }
+        } else {
+            setUser(null);
         }
     }, [token]);
 
