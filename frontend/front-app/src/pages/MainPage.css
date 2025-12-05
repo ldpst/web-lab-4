@@ -88,6 +88,7 @@
     width: 60px;
     background-color: #b5bcb1;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .point-input-btn {
@@ -98,9 +99,10 @@
     font-family: var(--general-font-family);
     font-size: 16px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
-.point-input-btn:active {
+.point-input-btn:active, .spinner-btn:active, #logout-btn:active {
     background-color: #90a49f;
 }
 
