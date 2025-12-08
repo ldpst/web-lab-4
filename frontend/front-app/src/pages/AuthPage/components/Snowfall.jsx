@@ -1,6 +1,6 @@
 import "./Snowflake.css";
 import React, { useState, useEffect } from "react";
-import snowflakeImg from "../../assets/snowflake.png";
+import snowflakeImg from "../../../assets/snowflake.png";
 
 function Snowflake({ size, left, delay, duration }) {
     return (

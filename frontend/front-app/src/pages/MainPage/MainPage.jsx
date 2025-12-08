@@ -1,16 +1,16 @@
 import axios from "axios";
 import "./MainPage.css";
 import {useState, useEffect, useContext, useRef } from "react";
-import { AuthContext } from "../utils/AuthContext";
-import Graph from "./components/Graph";
+import { AuthContext } from "../../utils/AuthContext";
+import Graph from "../components/Graph";
 import Decimal from "decimal.js";
-import macanImg from '../assets/macan.png';
-import elenaImg from '../assets/elena.jpg';
-import babyImg from '../assets/baby.png';
-import donorImg from '../assets/donor.png';
-import wifeImg from '../assets/wife.png';
-import pergImg from '../assets/perg.png';
-import Advertisement from "./components/advertisement";
+import macanImg from '../../assets/macan.png';
+import elenaImg from '../../assets/elena.jpg';
+import babyImg from '../../assets/baby.png';
+import donorImg from '../../assets/donor.png';
+import wifeImg from '../../assets/wife.png';
+import pergImg from '../../assets/perg.png';
+import Advertisement from "../components/advertisement";
 
 function MainPage() {
     const authContext = useContext(AuthContext);
