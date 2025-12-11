@@ -158,7 +158,7 @@
 
 .point-input-top span {
     font-family: var(--general-font-family);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .input-error-div {
@@ -241,6 +241,23 @@
     overflow-y: auto;
 }
 
+.adver-div {
+    display: none;
+    width: 100%;
+    z-index: 11;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: auto;
+    background: #2f3e46;
+    height: 100%;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+}
+
 @media (max-width: 1400px) {
     .top-div {
         display: flex;
@@ -251,7 +268,11 @@
 
 @media (max-width: 890px) {
     .left-div,.right-div {
-        display: none;
+        display: none
+    }
+
+    .adver-div {
+        display: flex;
     }
 }
 
